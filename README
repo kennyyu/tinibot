@@ -1,7 +1,0 @@
-Drink Mixer
-===========
-
-NOTE:
-
-DEVICE in arduino.py must match the port the arduino
-is connected to (bottom right of the arduino window).
