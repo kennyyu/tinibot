@@ -1,0 +1,77 @@
+<!doctype>
+<html>
+  <head>
+    <title>Drink Mixer!</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        function showstatus(s) {
+          $("#status").html(s);
+        }
+
+        var recognition = new webkitSpeechRecognition();
+        recognition.onstart = function() {
+          showstatus("What drink would you like? speak now...");
+        }
+        recognition.onend = function() {
+          showstatus("done.");
+        }
+        recognition.onerror = function(event) {
+          if (event.error == "no-speech") {
+            showstatus("error: no speech");
+          }
+          if (event.error == "audio-capture") {
+            showstatus("error: audio capture");
+          }
+          if (event.error == "not-allowed") {
+            if (event.timeStamp - start_timestamp < 100) {
+              showstatus("error: blocked");
+            } else {
+              showstatus("error: denied");
+            }
+          }
+        }
+
+        // Find the result with the highest confidence
+        // and send that to the server.
+        // TODO: send ALL the results to the server
+        // and let the server choose the drink.
+        recognition.onresult = function(event) {
+          console.log(event);
+          var best_text = "";
+          var best_confidence = -1.0;
+          $("results").html("");
+          for (var i = 0; i < event.results.length; i++) {
+            var result = event.results[i];
+            for (var j = 0; j < result.length; j++) {
+              var choice = result[j];
+              var confidence = choice["confidence"];
+              var transcript = choice["transcript"];
+              $("#results").append("<p>" + transcript + ", " + confidence + "</p>");
+              if (confidence > best_confidence) {
+                best_confidence = confidence;
+                best_text = transcript;
+              }
+            }
+          }
+
+          if (best_text != "") {
+            $.get("http://localhost:8880/speech", {
+              "text": best_text,
+              "confidence": best_confidence,
+            });
+          }
+        };
+
+        $("#button").click(function(e) {
+          recognition.start();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <p id="status"></p>
+    <div id="results"></p>
+    <input id="button" type="button" value="Click to speak">
+  </body>
+</html>
