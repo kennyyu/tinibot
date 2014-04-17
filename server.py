@@ -2,6 +2,8 @@ import os
 import tornado.ioloop
 import tornado.web
 import subprocess
+import urllib2
+import json
 
 PORT = 8880
 
@@ -16,9 +18,17 @@ class SpeechHandler(tornado.web.RequestHandler):
         # TODO change this to your own domain
         self.set_header("Access-Control-Allow-Origin", "http://localhost:%d" % PORT)
 
-    def get(self):
-        text = self.get_argument("text", "")
-        confidence = float(self.get_argument("confidence", ""))
+    def post(self):
+        data = urllib2.unquote(self.request.body)
+        values = json.loads(data)["values"]
+        values = sorted(values, key=lambda v: v["confidence"], reverse=True)
+        print values
+        text = values[0]["text"]
+        confidence = values[0]["confidence"]
+#        values = self.get_argument("values")
+#        print values
+#        text = self.get_argument("text", "")
+#        confidence = float(self.get_argument("confidence", ""))
         print "GOT: %s, %f" % (text, confidence)
         subprocess.call(("say 'you said %s'" % text).split())
         self.write("OK")

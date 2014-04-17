@@ -40,6 +40,7 @@
           console.log(event);
           var best_text = "";
           var best_confidence = -1.0;
+          var guesses = new Array();
           $("results").html("");
           for (var i = 0; i < event.results.length; i++) {
             var result = event.results[i];
@@ -52,13 +53,20 @@
                 best_confidence = confidence;
                 best_text = transcript;
               }
+              var guess = {"text": transcript, "confidence": confidence};
+              guesses.push(guess);
             }
           }
 
           if (best_text != "") {
-            $.get("http://localhost:8880/speech", {
-              "text": best_text,
-              "confidence": best_confidence,
+            var request = {values: guesses};
+            var requeststr = JSON.stringify(request);
+            console.log(requeststr);
+            $.ajax({
+              type: "POST",
+              url: "http://localhost:8880/speech",
+              data: requeststr,
+              dataType: "json",
             });
           }
         };
