@@ -25,10 +25,6 @@ class SpeechHandler(tornado.web.RequestHandler):
         print values
         text = values[0]["text"]
         confidence = values[0]["confidence"]
-#        values = self.get_argument("values")
-#        print values
-#        text = self.get_argument("text", "")
-#        confidence = float(self.get_argument("confidence", ""))
         print "GOT: %s, %f" % (text, confidence)
         subprocess.call(("say 'you said %s'" % text).split())
         self.write("OK")

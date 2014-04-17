@@ -32,9 +32,7 @@
           }
         }
 
-        // Find the result with the highest confidence
-        // and send that to the server.
-        // TODO: send ALL the results to the server
+        // Send ALL the results to the server
         // and let the server choose the drink.
         recognition.onresult = function(event) {
           console.log(event);
