@@ -11,13 +11,20 @@
           $("#status").html(s);
         }
 
+        var tryagain = true;
+
         showstatus("Click the button to make a drink!")
         var recognition = new webkitSpeechRecognition();
         recognition.onstart = function() {
           showstatus("What drink would you like? speak now...");
+          tryagain = true;
         }
         recognition.onend = function() {
           showstatus("done. try again!");
+          if (tryagain) {
+            $.get(ENDPOINT + "/unknown");
+          }
+          tryagain = false;
         }
         recognition.onerror = function(event) {
           if (event.error == "no-speech") {
@@ -38,6 +45,7 @@
         // Send ALL the results to the server
         // and let the server choose the drink.
         recognition.onresult = function(event) {
+          tryagain = false;
           console.log(event);
           var best_text = "";
           var best_confidence = -1.0;
@@ -69,7 +77,7 @@
               dataType: "json",
             });
           } else {
-            $.get("http://localhost:8880/unknown");
+            $.get(ENDPOINT + "/unknown");
           }
         };
 
