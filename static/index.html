@@ -5,6 +5,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
+        var ENDPOINT = "https://localhost:8880";
+
         function showstatus(s) {
           $("#status").html(s);
         }
@@ -62,7 +64,7 @@
             console.log(requeststr);
             $.ajax({
               type: "POST",
-              url: "http://localhost:8880/speech",
+              url: ENDPOINT + "/speech",
               data: requeststr,
               dataType: "json",
             });
@@ -72,7 +74,7 @@
         };
 
         $("#button").click(function(e) {
-          $.get("http://localhost:8880/start");
+          $.get(ENDPOINT + "/start");
           showstatus("allow chrome access to mic");
           recognition.start();
         });
@@ -80,7 +82,7 @@
         // grab drink menu
         $.ajax({
           type: "GET",
-          url: "http://localhost:8880/drinks",
+          url: ENDPOINT + "/drinks",
           dataType: "json",
           success: function(data) {
             console.log(data);

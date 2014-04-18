@@ -74,7 +74,7 @@ application = tornado.web.Application([
 if __name__ == "__main__":
     print "[INFO] starting server on port %d" % PORT
     print "[INFO] arduino connected on device: %s" % arduino.DEVICE
-    print "[INFO] visit http://localhost:%d in chrome..." % PORT
+    print "[INFO] visit https://localhost:%d in chrome..." % PORT
     http_server = tornado.httpserver.HTTPServer(application, ssl_options = {
             "certfile": os.path.join("certs/server.crt"),
             "keyfile": os.path.join("certs/server_nopw.key"),
