@@ -13,14 +13,12 @@ import arduino
 PORT = 8880
 
 class MainHandler(tornado.web.RequestHandler):
-
     def get(self):
         self.render("static/index.html")
 
 class SpeechHandler(tornado.web.RequestHandler):
-
     def set_default_headers(self):
-        # TODO change this to your own domain
+        # This is required for cross-origin requests
         self.set_header("Access-Control-Allow-Origin", "https://localhost:%d" % PORT)
 
     def post(self):
@@ -42,18 +40,15 @@ class SpeechHandler(tornado.web.RequestHandler):
         self.write("OK")
 
 class DrinksHandler(tornado.web.RequestHandler):
-
     def get(self):
         self.write(json.dumps(drinks.DRINKS))
 
 class StartHandler(tornado.web.RequestHandler):
-
     def get(self):
         subprocess.call(("say what drink would you like?").split())
         self.write("OK")
 
 class UnknownHandler(tornado.web.RequestHandler):
-
     def get(self):
         subprocess.call(("say I don't know what you said, please try again.").split())
         self.write("OK")
@@ -79,6 +74,5 @@ if __name__ == "__main__":
             "certfile": os.path.join("certs/server.crt"),
             "keyfile": os.path.join("certs/server_nopw.key"),
     })
-    #application.listen(PORT)
     http_server.listen(8880)
     tornado.ioloop.IOLoop.instance().start()

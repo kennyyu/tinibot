@@ -1,6 +1,5 @@
 import serial
 import struct
-import time
 
 DEVICE = "/dev/tty.usbmodemfd121"
 
