@@ -73,6 +73,8 @@ application = tornado.web.Application([
 ], **settings)
 
 if __name__ == "__main__":
-    print "starting server on port %d, visit http://localhost:%d in chrome..." % (PORT, PORT)
+    print "[INFO] starting server on port %d" % PORT
+    print "[INFO] arduino connected on device: %s" % arduino.DEVICE
+    print "[INFO] visit http://localhost:%d in chrome..." % PORT
     application.listen(PORT)
     tornado.ioloop.IOLoop.instance().start()
