@@ -12,30 +12,42 @@ void setup() {
   }
 }
 
-void loop() {
-  struct message msg;
-  for (unsigned i = 0; i < npins; i++) {
-    msg.times[i] = 0;
-  }
-  char *buf = (char *) &msg;
+void readn(char *buf, unsigned len) {
   unsigned nread = 0;
-  unsigned len = sizeof(struct message);
-
   while (nread < len) {
     if (Serial.available() > 0) {
       byte result = Serial.readBytes(&buf[nread], len - nread);
       nread += result;
     }
   }
-  String response = "RESPONSE>>> " + String(msg.times[0]) + "," + String(msg.times[1]) + "," + String(msg.times[2]);
-  Serial.println(response);
-  Serial.flush();
+}
+
+void activatepins(struct message *msg) {
   for (unsigned i = 0; i < npins; i++) {
     unsigned pin = pins[i];
     digitalWrite(pin, HIGH);
-    delay(msg.times[i]);
+    delay(msg->times[i]);
     digitalWrite(pin, LOW);
   }
+}
+
+void writeresponse(struct message *msg) {
+  String response = "RESPONSE>>> ";
+  for (unsigned i = 0; i < npins; i++) {
+    response += String(msg->times[i]) + ",";
+  }
+  Serial.println(response);
+  Serial.flush();
+}
+
+void loop() {
+  struct message msg;
+  for (unsigned i = 0; i < npins; i++) {
+    msg.times[i] = 0;
+  }
+  readn((char *) &msg, sizeof(struct message));
+  writeresponse(&msg);
+  activatepins(&msg);
   delay(1000);
 }
 
