@@ -21,7 +21,7 @@ class SpeechHandler(tornado.web.RequestHandler):
 
     def set_default_headers(self):
         # TODO change this to your own domain
-        self.set_header("Access-Control-Allow-Origin", "http://localhost:%d" % PORT)
+        self.set_header("Access-Control-Allow-Origin", "https://localhost:%d" % PORT)
 
     def post(self):
         data = urllib2.unquote(self.request.body)
