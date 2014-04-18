@@ -1,6 +1,8 @@
 const unsigned npins = 6;
 const unsigned pins[npins] = {4, 5, 6, 7, 8, 9};
 
+// Message that will be sent over the wire.
+// Contains the times to light up each of the pins.
 struct message {
   uint32_t times[npins];
 };
@@ -12,6 +14,7 @@ void setup() {
   }
 }
 
+// Will keep reading from stdin until it reads len bytes.
 void readn(char *buf, unsigned len) {
   unsigned nread = 0;
   while (nread < len) {
@@ -22,6 +25,8 @@ void readn(char *buf, unsigned len) {
   }
 }
 
+// Given the timings in the message, light up the
+// corresponding pins for the given amount of times.
 void activatepins(struct message *msg) {
   for (unsigned i = 0; i < npins; i++) {
     unsigned pin = pins[i];
@@ -31,6 +36,7 @@ void activatepins(struct message *msg) {
   }
 }
 
+// Send a response back to laptop for debugging purposes
 void writeresponse(struct message *msg) {
   String response = "RESPONSE>>> ";
   for (unsigned i = 0; i < npins; i++) {
