@@ -17,7 +17,7 @@ DRINKS = {
 # and adjust the multiplier.
 #
 # The final times will be in ms.
-TIME_MULTIPLIER = 2000
+TIME_MULTIPLIER = 5000
 
 def find_drink(text):
     for drink in DRINKS:
