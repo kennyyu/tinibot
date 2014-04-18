@@ -1,6 +1,13 @@
-Drink Mixer
-===========
+Tinibot: Voice Activated Drink Mixer
+====================================
 Kenny Yu, Michelle Luo, Karen Xiao
+
+## Instructions
+
+1. Find the arduino device, and set the `DEVICE` variable in `arduino.py`
+2. Start the server: `python server.py`
+3. Visit `https://localhost:8880` (must be SSL)
+4. Click the button and talk!
 
 ## Dependencies
 
@@ -12,7 +19,6 @@ Kenny Yu, Michelle Luo, Karen Xiao
 
 `DEVICE` in `arduino.py` must match the port the arduino
 is connected to (bottom right of the arduino window).
-
 To see the device, look in the `/dev` directory.
 
 Drinks are in `drinks.py`. The numbers mean the proportions of these
@@ -25,9 +31,6 @@ in this order:
 5. orange
 6. tonic
 
-## Setup and Demo
+The `certs` directory contains dummy generated SSL certs and keys,
+these aren't used for real applications.
 
-1. Find the arduino device, and set the `DEVICE` variable in `arduino.py`
-2. Start the server: `python server.py`
-3. Visit `https://localhost:8880` (must be SSL)
-4. Click the button and talk!
