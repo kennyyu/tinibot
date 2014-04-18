@@ -33,9 +33,7 @@ class SpeechHandler(tornado.web.RequestHandler):
         drink = drinks.find_drink(text)
         if drink != "":
             subprocess.call(("say 'you said %s. I will make the drink now.'" % text).split())
-            times = drinks.DRINKS[drink]
-            # TODO: normalize
-            times = map(lambda x: x * 1000, times)
+            times = drinks.get_times(drink)
             arduino.send_times(times)
             subprocess.call(("say enjoy your drink!").split())
         else:

@@ -12,8 +12,23 @@ DRINKS = {
     "rum punch": [0, 2, 0, 1, 4, 0],
 }
 
+# TODO
+# Figure out how much liquid can dispense in a second,
+# and adjust the multiplier.
+#
+# The final times will be in ms.
+TIME_MULTIPLIER = 2000
+
 def find_drink(text):
     for drink in DRINKS:
         if text.find(drink) != -1:
             return drink
     return ""
+
+def get_times(drink):
+    assert(drink in DRINKS)
+    ratios = DRINKS[drink]
+    s = sum(ratios)
+    normalized = [float(r) / s for r in ratios]
+    times = [int(x * TIME_MULTIPLIER) for x in normalized]
+    return times
