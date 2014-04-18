@@ -9,12 +9,13 @@
           $("#status").html(s);
         }
 
+        showstatus("Click the button to make a drink!")
         var recognition = new webkitSpeechRecognition();
         recognition.onstart = function() {
           showstatus("What drink would you like? speak now...");
         }
         recognition.onend = function() {
-          showstatus("done.");
+          showstatus("done. try again!");
         }
         recognition.onerror = function(event) {
           if (event.error == "no-speech") {
@@ -39,14 +40,13 @@
           var best_text = "";
           var best_confidence = -1.0;
           var guesses = new Array();
-          $("results").html("");
           for (var i = 0; i < event.results.length; i++) {
             var result = event.results[i];
             for (var j = 0; j < result.length; j++) {
               var choice = result[j];
               var confidence = choice["confidence"];
               var transcript = choice["transcript"];
-              $("#results").append("<p>" + transcript + ", " + confidence + "</p>");
+              $("#results").prepend("<li>" + transcript + ", " + confidence + "</li>");
               if (confidence > best_confidence) {
                 best_confidence = confidence;
                 best_text = transcript;
@@ -66,6 +66,8 @@
               data: requeststr,
               dataType: "json",
             });
+          } else {
+            $.get("http://localhost:8880/unknown");
           }
         };
 
@@ -93,11 +95,13 @@
   <body>
     <div>
       <h1>Drink Menu:</h1>
-      <ul id="drinks">
-      </ul>
+      <ul id="drinks"></ul>
     </div>
     <h1 id="status"></h1>
-    <div id="results"></p>
     <input id="button" type="button" value="Click to speak">
+    <div>
+      <h1>Order History:</h1>
+      <ul id="results"></ul>
+    </div>
   </body>
 </html>

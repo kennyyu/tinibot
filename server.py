@@ -4,10 +4,10 @@ import tornado.web
 import subprocess
 import urllib2
 import json
-import arduino
 
 # local imports
 import drinks
+import arduino
 
 PORT = 8880
 
@@ -30,9 +30,10 @@ class SpeechHandler(tornado.web.RequestHandler):
         text = values[0]["text"].lower()
         confidence = values[0]["confidence"]
         print "GOT: %s, %f" % (text, confidence)
-        if text in drinks.DRINKS:
+        drink = drinks.find_drink(text)
+        if drink != "":
             subprocess.call(("say 'you said %s. I will make the drink now.'" % text).split())
-            times = drinks.DRINKS[text]
+            times = drinks.DRINKS[drink]
             # TODO: normalize
             times = map(lambda x: x * 1000, times)
             arduino.send_times(times)
@@ -52,6 +53,12 @@ class StartHandler(tornado.web.RequestHandler):
         subprocess.call(("say what drink would you like?").split())
         self.write("OK")
 
+class UnknownHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        subprocess.call(("say I don't know what you said, please try again.").split())
+        self.write("OK")
+
 settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "static"),
 }
@@ -59,6 +66,7 @@ settings = {
 application = tornado.web.Application([
     (r"/", MainHandler),
     (r"/start", StartHandler),
+    (r"/unknown", UnknownHandler),
     (r"/drinks", DrinksHandler),
     (r"/speech", SpeechHandler),
     (r"/static", tornado.web.StaticFileHandler, dict(path=settings['static_path'])),

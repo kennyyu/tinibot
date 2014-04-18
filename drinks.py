@@ -11,3 +11,9 @@ DRINKS = {
     "rum tonic": [0, 2, 0, 0, 0, 3],
     "rum punch": [0, 2, 0, 1, 4, 0],
 }
+
+def find_drink(text):
+    for drink in DRINKS:
+        if text.find(drink) != -1:
+            return drink
+    return ""

@@ -5,7 +5,6 @@ import time
 DEVICE = "/dev/tty.usbmodemfd121"
 
 ser = serial.Serial(DEVICE, 9600)
-#time.sleep(2) # wait for device to initialize itself
 
 def send_times(times):
     assert(len(times) == 6)
