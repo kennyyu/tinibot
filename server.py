@@ -4,6 +4,7 @@ import tornado.web
 import subprocess
 import urllib2
 import json
+import arduino
 
 # local imports
 import drinks
@@ -26,10 +27,18 @@ class SpeechHandler(tornado.web.RequestHandler):
         values = json.loads(data)["values"]
         values = sorted(values, key=lambda v: v["confidence"], reverse=True)
         print values
-        text = values[0]["text"]
+        text = values[0]["text"].lower()
         confidence = values[0]["confidence"]
         print "GOT: %s, %f" % (text, confidence)
-        subprocess.call(("say 'you said %s'" % text).split())
+        if text in drinks.DRINKS:
+            subprocess.call(("say 'you said %s. I will make the drink now.'" % text).split())
+            times = drinks.DRINKS[text]
+            # TODO: normalize
+            times = map(lambda x: x * 1000, times)
+            arduino.send_times(times)
+            subprocess.call(("say enjoy your drink!").split())
+        else:
+            subprocess.call(("say I don't recognize this drink: %s" % text).split())
         self.write("OK")
 
 class DrinksHandler(tornado.web.RequestHandler):

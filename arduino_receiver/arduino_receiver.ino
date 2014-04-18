@@ -1,5 +1,5 @@
-const unsigned npins = 3;
-const unsigned pins[npins] = {4, 5, 6};
+const unsigned npins = 6;
+const unsigned pins[npins] = {4, 5, 6, 7, 8, 9};
 
 struct message {
   uint32_t times[npins];

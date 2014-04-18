@@ -5,10 +5,12 @@ import time
 DEVICE = "/dev/tty.usbmodemfd121"
 
 ser = serial.Serial(DEVICE, 9600)
-time.sleep(2) # wait for device to initialize itself
+#time.sleep(2) # wait for device to initialize itself
 
-while True:
-    request = struct.pack("<III", 1000, 2000, 3000)
+def send_times(times):
+    assert(len(times) == 6)
+    ntimes = 6
+    request = struct.pack("<IIIIII", times[0], times[1], times[2], times[3], times[4], times[5])
     ser.write(request)
     response = ser.readline()
     response = response.strip()
