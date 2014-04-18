@@ -70,14 +70,33 @@
         };
 
         $("#button").click(function(e) {
+          $.get("http://localhost:8880/start");
           showstatus("allow chrome access to mic");
           recognition.start();
+        });
+
+        // grab drink menu
+        $.ajax({
+          type: "GET",
+          url: "http://localhost:8880/drinks",
+          dataType: "json",
+          success: function(data) {
+            console.log(data);
+            for (var drink in data) {
+              $("#drinks").append("<li>" + drink  + "</li>");
+            }
+          },
         });
       });
     </script>
   </head>
   <body>
-    <p id="status"></p>
+    <div>
+      <h1>Drink Menu:</h1>
+      <ul id="drinks">
+      </ul>
+    </div>
+    <h1 id="status"></h1>
     <div id="results"></p>
     <input id="button" type="button" value="Click to speak">
   </body>

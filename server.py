@@ -5,6 +5,9 @@ import subprocess
 import urllib2
 import json
 
+# local imports
+import drinks
+
 PORT = 8880
 
 class MainHandler(tornado.web.RequestHandler):
@@ -29,12 +32,25 @@ class SpeechHandler(tornado.web.RequestHandler):
         subprocess.call(("say 'you said %s'" % text).split())
         self.write("OK")
 
+class DrinksHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        self.write(json.dumps(drinks.DRINKS))
+
+class StartHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        subprocess.call(("say what drink would you like?").split())
+        self.write("OK")
+
 settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "static"),
 }
 
 application = tornado.web.Application([
     (r"/", MainHandler),
+    (r"/start", StartHandler),
+    (r"/drinks", DrinksHandler),
     (r"/speech", SpeechHandler),
     (r"/static", tornado.web.StaticFileHandler, dict(path=settings['static_path'])),
 ], **settings)
