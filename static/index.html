@@ -96,8 +96,24 @@
           success: function(data) {
             console.log(data);
             for (var drink in data) {
-              $("#drinks").append("<li>" + drink  + "</li>");
+              $("#drinks").append("<li><button class='order'>" + drink + "</button></li>");
             }
+            $(".order").click(function(e) {
+              var guesses = new Array();
+              var transcript = $(this).text();
+              var confidence = 1.0;
+              guesses.push({text: transcript, confidence: confidence});
+              var request = {values: guesses};
+              var requeststr = JSON.stringify(request);
+              console.log(requeststr);
+              $.ajax({
+                type: "POST",
+                url: ENDPOINT + "/speech",
+                data: requeststr,
+                dataType: "json",
+              });
+              $("#results").prepend("<li>" + transcript + ", " + confidence + "</li>");
+            });
           },
         });
       });
