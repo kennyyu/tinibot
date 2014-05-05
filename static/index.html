@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Drink Mixer!</title>
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
@@ -17,10 +18,12 @@
         var recognition = new webkitSpeechRecognition();
         recognition.onstart = function() {
           showstatus("What drink would you like? speak now...");
+          $("#status").toggleClass("alert-success alert-warning")
           tryagain = true;
         }
         recognition.onend = function() {
           showstatus("done. try again!");
+          $("#status").toggleClass("alert-success alert-info")
           if (tryagain) {
             $.get(ENDPOINT + "/unknown");
           }
@@ -81,11 +84,12 @@
           }
         };
 
-        $("#button").click(function(e) {
+        $("#status").click(function(e) {
           $.get(ENDPOINT + "/start", function() {
             recognition.start();
           });
           showstatus("allow chrome access to mic");
+          $("#status").toggleClass("alert-info alert-warning")
         });
 
         // grab drink menu
@@ -96,7 +100,7 @@
           success: function(data) {
             console.log(data);
             for (var drink in data) {
-              $("#drinks").append("<li><button class='order'>" + drink + "</button></li>");
+              $("#drinks").append("<div class='order'>" + drink + "</div>");
             }
             $(".order").click(function(e) {
               var guesses = new Array();
@@ -120,14 +124,23 @@
     </script>
   </head>
   <body>
-    <div>
-      <h1>Drink Menu:</h1>
-      <ul id="drinks"></ul>
+    <div class="header">tiniBot</div>
+    <h2 style="text-align:center">by Michelle Luo, Kenny Yu, & Karen Xiao</h2>
+    
+    <div class="alert alert-info" id="status"></div>
+    <!--<input id="button" type="button" value="Click to speak">-->
+
+    <div class="clear"><br/></div>
+
+    <div id="menu">
+      <div class="header">Drink Menu</div>
+      <hr/>
+      <div id="drinks"></div>
     </div>
-    <h1 id="status"></h1>
-    <input id="button" type="button" value="Click to speak">
-    <div>
-      <h1>Order History:</h1>
+    
+    <div id="history">
+      <div class="header">Order History</div>
+      <hr/>
       <ul id="results"></ul>
     </div>
   </body>
