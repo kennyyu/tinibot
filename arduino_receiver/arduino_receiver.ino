@@ -33,6 +33,7 @@ void activatepins(struct message *msg) {
     digitalWrite(pin, HIGH);
     delay(msg->times[i]);
     digitalWrite(pin, LOW);
+    delay(300);
   }
 }
 
