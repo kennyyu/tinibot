@@ -9,7 +9,7 @@ def find_device():
     proc = subprocess.Popen("ls %s" % DEVICE_PATTERN, stdout=subprocess.PIPE, stderr=open(os.devnull, "w"), shell=True)
     lines = proc.stdout.readlines()
     if len(lines) == 0:
-        raise Exception("[ERROR] Couldn't find arduino device in %s" % DEVICE_PATTERN)
+        #raise Exception("[ERROR] Couldn't find arduino device in %s" % DEVICE_PATTERN)
     else:
         return lines[0].strip()
 

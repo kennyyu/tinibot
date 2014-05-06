@@ -59,7 +59,7 @@
               var choice = result[j];
               var confidence = choice["confidence"];
               var transcript = choice["transcript"];
-              $("#results").prepend("<li>" + transcript + ", " + confidence + "</li>");
+              $("#results").prepend("<li>" + transcript + " (" + Number(confidence * 100).toFixed(2) + "% confident)</li>");
               if (confidence > best_confidence) {
                 best_confidence = confidence;
                 best_text = transcript;
@@ -116,7 +116,7 @@
                 data: requeststr,
                 dataType: "json",
               });
-              $("#results").prepend("<li>" + transcript + ", " + confidence + "</li>");
+              $("#results").prepend("<li>" + transcript + " (" + Number(confidence * 100).toFixed(2) + "% confident)</li>");
             });
           },
         });
@@ -137,6 +137,8 @@
       <hr/>
       <div id="drinks"></div>
     </div>
+
+    <div id="vertical"></div>
     
     <div id="history">
       <div class="header">Order History</div>

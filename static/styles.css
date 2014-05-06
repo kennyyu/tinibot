@@ -15,18 +15,32 @@ body {
 }
 
 .order {
+	width: 90%;
 	cursor: pointer;
+	padding-left: 10px;
+	margin-left: 3%;
+}
+.order:hover {
+	background-color: #9acfea;
+	color: white;
 }
 
 #menu {
 	float: left;
-	width: 49%;
-	border-right: 1px solid black;
+	width: 48%;
+}
+
+#vertical {
+	height: 100%;
+	border-left: 1px solid black;
+	float: left;
+	width: 0px;
+	margin: 10px 18px;
 }
 
 #history {
 	float: right;
-	width: 49%;
+	width: 48%;
 }
 
 .alert {

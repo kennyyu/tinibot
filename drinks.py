@@ -1,22 +1,40 @@
+# alcoholic drinks: [purple: gin, blue: rum, green: vodka, yellow: cranberry, orange: OJ, red: tonic]
+# non-alcoholic: [purple: apple, blue: lemonade, green: iced tea, yellow: cranberry, orange: OJ, red: seltzer]
+
 DRINKS = {
-    "gilbert": [0, 0, 2, 1, 0, 1],
-    "vodka tonic": [0, 0, 1, 0, 0, 2],
-    "screwdriver": [0, 0, 1, 0, 2, 0],
-    "gin and tonic": [1, 0, 0, 0, 0, 1],
-    "vodka cranberry": [0, 0, 2, 3, 0, 0],
-    "cape codder": [0, 0, 0, 2, 3, 0],
-    "madras": [0, 0, 2, 4, 1, 0],
-    "cranberry gin": [2, 0, 0, 3, 0, 0],
-    "orange blossom": [1, 0, 0, 0, 2, 0],
-    "rum tonic": [0, 2, 0, 0, 0, 3],
-    "rum punch": [0, 2, 0, 1, 4, 0],
-    "purple": [1,0,0,0,0,0],
-    "blue": [0,1,0,0,0,0],
-    "green": [0,0,1,0,0,0],
-    "yellow": [0,0,0,1,0,0],
-    "orange": [0,0,0,0,1,0],
-    "red": [0,0,0,0,0,1],
+    # alcoholic drinks
+    # "gilbert": [0, 0, 2, 1, 0, 1],
+    # "vodka tonic": [0, 0, 1, 0, 0, 2],
+    # "screwdriver": [0, 0, 1, 0, 2, 0],
+    # "gin and tonic": [1, 0, 0, 0, 0, 1],
+    # "vodka cranberry": [0, 0, 2, 3, 0, 0],
+    # "cape codder": [0, 0, 0, 2, 3, 0],
+    # "madras": [0, 0, 2, 4, 1, 0],
+    # "cranberry gin": [2, 0, 0, 3, 0, 0],
+    # "orange blossom": [1, 0, 0, 0, 2, 0],
+    # "rum tonic": [0, 2, 0, 0, 0, 3],
+    # "rum punch": [0, 2, 0, 1, 4, 0],
+    # "purple": [1,0,0,0,0,0],
+    # "blue": [0,1,0,0,0,0],
+    # "green": [0,0,1,0,0,0],
+    # "yellow": [0,0,0,1,0,0],
+    # "orange": [0,0,0,0,1,0],
+    # "red": [0,0,0,0,0,1],
+
+    # drinks for the fair
     "rainbow": [1,1,1,1,1,1],
+    "apple seltzer": [1,0,0,0,0,1],
+    "orange seltzer": [0,0,0,0,1,1],
+    "cranberry seltzer": [0,0,0,1,0,1],
+    "arnold palmer": [0,1,1,0,0,0],
+    "pink lemonade": [0,4,0,1,0,0],
+    "citrus spritz": [0,1,0,0,1,2],
+    "cranberry orange": [0,0,0,1,1,0],
+    "cranapple juice":[1,0,0,1,0,0],
+    "iced tea punch": [1,0,2,1,1,0],
+    "apple lemonade": [1,1,0,0,0,0],
+    "sunrise spritz": [0,0,0,1,1,2]
+
 }
 
 # TODO
