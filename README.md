@@ -4,9 +4,11 @@ Kenny Yu, Michelle Luo, Karen Xiao
 
 ## Instructions
 
-1. Start the server: `python server.py` [make sure the arduino is plugged in]
-2. Visit `https://localhost:8880` (must be SSL)
-3. Click the button and talk!
+1. Plug in the Arduino, and upload the Arduino program in the `arduino_receiver` directory
+   into the Arduino.
+2. Start the server: `python server.py` [make sure the arduino is plugged in]
+3. Visit `https://localhost:8880` (must be SSL)
+4. Click the button and talk!
 
 ## Dependencies
 
