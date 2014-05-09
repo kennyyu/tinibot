@@ -1,5 +1,5 @@
 # alcoholic drinks: [purple: gin, blue: rum, green: vodka, yellow: cranberry, orange: OJ, red: tonic]
-# non-alcoholic: [purple: apple, blue: lemonade, green: iced tea, yellow: cranberry, orange: OJ, red: seltzer]
+# non-alcoholic: [purple: lemonade, blue: apple, green: iced tea, yellow: cranberry, orange: OJ, red: seltzer]
 
 DRINKS = {
     # alcoholic drinks
@@ -23,15 +23,15 @@ DRINKS = {
 
     # drinks for the fair
     "rainbow": [1,1,1,1,1,1],
-    "apple seltzer": [1,0,0,0,0,1],
+    "apple seltzer": [0,1,0,0,0,1],
     "orange seltzer": [0,0,0,0,1,1],
     "cranberry seltzer": [0,0,0,1,0,1],
-    "arnold palmer": [0,1,1,0,0,0],
-    "pink lemonade": [0,4,0,1,0,0],
-    "citrus spritz": [0,1,0,0,1,2],
+    "arnold palmer": [1,0,1,0,0,0],
+    "pink lemonade": [4,0,0,1,0,0],
+    "citrus spritz": [1,0,0,0,1,2],
     "cranberry orange": [0,0,0,1,1,0],
-    "cranapple juice":[1,0,0,1,0,0],
-    "iced tea punch": [1,0,2,1,1,0],
+    "cranapple juice":[0,1,0,1,0,0],
+    "iced tea punch": [0,1,2,1,1,0],
     "apple lemonade": [1,1,0,0,0,0],
     "sunrise spritz": [0,0,0,1,1,2]
 
@@ -42,7 +42,7 @@ DRINKS = {
 # and adjust the multiplier.
 #
 # The final times will be in ms.
-TIME_MULTIPLIER = 1000
+TIME_MULTIPLIER = 5000
 
 def find_drink(text):
     for drink in DRINKS:
