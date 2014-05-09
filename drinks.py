@@ -15,21 +15,6 @@ DRINKS = {
      "rum tonic": [0, 2, 0, 0, 0, 3],
      "rum punch": [0, 2, 0, 1, 4, 0],
 
-<<<<<<< HEAD
-    # drinks for the fair
-    "rainbow": [1,1,1,1,1,1],
-    "apple seltzer": [0,1,0,0,0,1],
-    "orange seltzer": [0,0,0,0,1,1],
-    "cranberry seltzer": [0,0,0,1,0,1],
-    "arnold palmer": [1,0,1,0,0,0],
-    "pink lemonade": [4,0,0,1,0,0],
-    "citrus spritz": [1,0,0,0,1,2],
-    "cranberry orange": [0,0,0,1,1,0],
-    "cranapple juice":[0,1,0,1,0,0],
-    "iced tea punch": [0,1,2,1,1,0],
-    "apple lemonade": [1,1,0,0,0,0],
-    "sunrise spritz": [0,0,0,1,1,2]
-=======
 # drinks for clearing the bottles
 #     "purple": [1,0,0,0,0,0],
 #     "blue": [0,1,0,0,0,0],
@@ -37,7 +22,6 @@ DRINKS = {
 #     "yellow": [0,0,0,1,0,0],
 #     "orange": [0,0,0,0,1,0],
 #     "red": [0,0,0,0,0,1],
->>>>>>> 1c37bd365e6a45c89b5ec516648d3ddd0e7b5579
 
 # drinks for the fair
 #    "rainbow": [1,1,1,1,1,1],
