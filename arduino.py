@@ -24,6 +24,7 @@ def send_times(times):
     # to indicate we want to pack the struct in little endian format
     request = struct.pack("<IIIIII", times[0], times[1], times[2], times[3], times[4], times[5])
     ser.write(request)
+    ser.flush()
     response = ser.readline()
     response = response.strip()
     print response
